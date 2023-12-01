@@ -1,0 +1,16 @@
+.footerdiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  width: 98%;
+  border: 1px solid #dddddd;
+  margin-top: 10px;
+}
+
+.footerbtn {
+  border: 1px solid #dddddd;
+  background-color: white;
+  margin-right: 6px;
+  border-radius: 2px;
+}

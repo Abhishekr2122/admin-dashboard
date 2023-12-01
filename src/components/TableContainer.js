@@ -1,6 +1,7 @@
 import "./TableContainer.css";
 import { useEffect, useState } from "react";
 import TableRow from "./TableRow";
+import Footer from "./Footer";
 
 export default function TableContainer() {
   const [tableContainer, setTablecontainer] = useState([]);
@@ -36,6 +37,7 @@ export default function TableContainer() {
           return <TableRow data={citem} key={i} />;
         })}
       </table>
+      <Footer />
     </div>
   );
 }
