@@ -1,0 +1,10 @@
+.table {
+  border: 1px solid salmon;
+  width: 100%;
+  border-radius: 2px;
+}
+
+.tableheader {
+  color: lightslategrey;
+  font-weight: 600;
+}
