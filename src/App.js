@@ -1,13 +1,14 @@
 import "./App.css";
 import NavBar from "../src/components/NavBar";
 import TableContainer from "./components/TableContainer";
+import TableDataProvider from "./context/TableDataProvider";
 
 function App() {
   return (
-    <div className="App">
+    <TableDataProvider>
       <NavBar />
       <TableContainer />
-    </div>
+    </TableDataProvider>
   );
 }
 
