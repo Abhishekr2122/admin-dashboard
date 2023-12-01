@@ -1,5 +1,6 @@
 import "./TableContainer.css";
 import { useEffect, useState } from "react";
+import TableRow from "./TableRow";
 
 export default function TableContainer() {
   const [tableContainer, setTablecontainer] = useState([]);
@@ -10,6 +11,7 @@ export default function TableContainer() {
       );
 
       const data = await res.json();
+      setTablecontainer(data);
     }
 
     getData();
@@ -18,13 +20,21 @@ export default function TableContainer() {
   return (
     <div style={{ marginTop: "10px" }}>
       <table className="table">
-        <tr>
-          <th className="tableheader">checkbox</th>
+        <tr className="tablerow">
+          <th className="tableheader">
+            <form>
+              <input type="checkbox" />
+            </form>
+          </th>
           <th className="tableheader">Name</th>
           <th className="tableheader">Email</th>
           <th className="tableheader">Role</th>
           <th className="tableheader">Actions</th>
         </tr>
+
+        {tableContainer.map(function (citem, i) {
+          return <TableRow data={citem} key={i} />;
+        })}
       </table>
     </div>
   );

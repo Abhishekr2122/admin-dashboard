@@ -1,10 +1,26 @@
 .table {
-  border: 1px solid salmon;
-  width: 100%;
+  border: 1px solid #dddddd;
+  width: 98%;
   border-radius: 2px;
+  margin-left: 10px;
 }
 
 .tableheader {
   color: lightslategrey;
   font-weight: 600;
+}
+
+.tablerow {
+  height: 50px;
+  width: 100px;
+}
+
+.tabledata {
+  border: 1px solid #dddddd;
+  text-align: center;
+}
+
+.btn {
+  border: 1px solid #dddddd;
+  background-color: white;
 }
