@@ -4,10 +4,18 @@ import Footer from "./Footer";
 import { useAppData } from "../context/TableDataProvider";
 
 export default function TableContainer() {
-  const { tableData, searchQuery, setTableData, setSearchQuery, isLoading } =
-    useAppData();
+  const {
+    tableData,
+    searchQuery,
+    setTableData,
+    setSearchQuery,
+    isLoading,
+    pageCount,
+  } = useAppData();
 
-  console.log("this is is loading", isLoading);
+  let resultTableData = tableData.filter(function (citem, i) {
+    return i >= (pageCount - 1) * 10 && i < pageCount * 10;
+  });
 
   //   const [tableContainer, setTablecontainer] = useState([]);
   //   useEffect(function () {
@@ -28,7 +36,11 @@ export default function TableContainer() {
   //   }
 
   return (
-    <div style={{ marginTop: "10px" }}>
+    <div
+      style={{
+        marginTop: "10px",
+      }}
+    >
       <table className="table">
         <tbody>
           <tr className="tablerow">
@@ -43,7 +55,7 @@ export default function TableContainer() {
             <th className="tableheader">Actions</th>
           </tr>
 
-          {tableData.map(function (citem, i) {
+          {resultTableData.map(function (citem, i) {
             return <TableRow data={citem} key={i} />;
           })}
         </tbody>

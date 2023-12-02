@@ -47,7 +47,7 @@ export default function Footer() {
             } else {
               return (
                 <button
-                  className="footerbtn active"
+                  className={`footerbtn ${i + 1 === pageCount ? "active" : ""}`}
                   onClick={function () {
                     pagecountupdate(i + 1);
                   }}

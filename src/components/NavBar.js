@@ -1,11 +1,27 @@
+import { useAppData } from "../context/TableDataProvider";
 import "./NavBar.css";
 import { PiTrashSimpleThin } from "react-icons/pi";
 
 export default function NavBar() {
+  const { searchQuery, setSearchQuery } = useAppData();
+  console.log("This is searchQuery", searchQuery);
+
+  function updatesearchquery(inputData) {
+    setSearchQuery(inputData.target.value);
+  }
   return (
     <header className="navbar">
       <form className="form">
-        <input className="input" type="text" placeholder="Search..." />
+        <input
+          className="input"
+          type="text"
+          placeholder="Search..."
+          value={searchQuery}
+          onChange={function (e) {
+            e.preventDefault();
+            updatesearchquery(e);
+          }}
+        />
       </form>
       <div>
         <button
@@ -16,6 +32,7 @@ export default function NavBar() {
             height: "40px",
             width: "45px",
             border: "1px solid white",
+            cursor: "pointer",
           }}
         >
           <PiTrashSimpleThin
