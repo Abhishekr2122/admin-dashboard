@@ -3,7 +3,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import "./Footer.css";
 export default function Footer() {
-  const { tableData, pageCount, setPageCount } = useAppData();
+  const { tableData, pageCount, setPageCount, searchQuery } = useAppData();
 
   function pagecountupdate(pageNumber) {
     setPageCount(pageNumber);
@@ -28,7 +28,7 @@ export default function Footer() {
   console.log("This is pageCount", pageCount);
   return (
     <div className="footerdiv">
-      <p>0 of 46 rows selected</p>
+      <p style={{ marginLeft: "4px" }}>0 of 46 rows selected</p>
       <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
         <p>
           page {pageCount} of {Math.round(tableData.length / 10)}
@@ -36,7 +36,9 @@ export default function Footer() {
         <div>
           <button
             className="footerbtn"
-            disabled={pageCount < 1 ? true : false}
+            disabled={
+              pageCount < 1 ? true : false || searchQuery ? true : false
+            }
             onClick={pagedecrement}
           >
             <IoIosArrowBack style={{ marginTop: "2px" }} />
@@ -52,6 +54,7 @@ export default function Footer() {
                     pagecountupdate(i + 1);
                   }}
                   key={i}
+                  disabled={searchQuery ? true : false && pageCount != i + 1}
                 >
                   {i + 1}
                 </button>
@@ -60,7 +63,9 @@ export default function Footer() {
           })}
           <button
             className="footerbtn"
-            disabled={pageCount >= 5 ? true : false}
+            disabled={
+              pageCount >= 5 ? true : false || searchQuery ? true : false
+            }
             onClick={pageincrement}
           >
             <IoIosArrowForward style={{ marginTop: "2px" }} />

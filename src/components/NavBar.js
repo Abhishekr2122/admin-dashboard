@@ -11,7 +11,12 @@ export default function NavBar() {
   }
   return (
     <header className="navbar">
-      <form className="form">
+      <form
+        className="form"
+        onSubmit={function (e) {
+          e.preventDefault();
+        }}
+      >
         <input
           className="input"
           type="text"
