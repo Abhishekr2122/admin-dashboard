@@ -3,9 +3,15 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import "./Footer.css";
 
-export default function Footer() {
-  const { tableData, pageCount, setPageCount, searchQuery, mainCheckbox } =
-    useAppData();
+export default function Footer({ paginatedTableData }) {
+  const {
+    tableData,
+    pageCount,
+    setPageCount,
+    searchQuery,
+    mainCheckbox,
+    selectedRowArr,
+  } = useAppData();
 
   function pagecountupdate(pageNumber) {
     setPageCount(pageNumber);
@@ -27,12 +33,11 @@ export default function Footer() {
     }
   }
 
-  console.log("This is pageCount", pageCount);
   return (
     <div className="footerdiv">
       <p style={{ marginLeft: "4px" }}>
-        {mainCheckbox ? tableData.length : 0} of {tableData.length} rows
-        selected
+        {mainCheckbox ? paginatedTableData.length : selectedRowArr.length} of{" "}
+        {paginatedTableData.length} rows selected
       </p>
       <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
         <p>
@@ -59,7 +64,7 @@ export default function Footer() {
                     pagecountupdate(i + 1);
                   }}
                   key={i}
-                  disabled={searchQuery ? true : false && pageCount !== i + 1}
+                  disabled={searchQuery ? true : false}
                 >
                   {i + 1}
                 </button>

@@ -2,7 +2,6 @@ import "./TableContainer.css";
 import TableRow from "./TableRow";
 import Footer from "./Footer";
 import { useAppData } from "../context/TableDataProvider";
-import { useState } from "react";
 
 export default function TableContainer() {
   const {
@@ -54,6 +53,7 @@ export default function TableContainer() {
                       return !crrMainCheckbox;
                     });
                   }}
+                  checked={mainCheckbox ? "checked" : ""}
                 />
               </form>
             </th>
@@ -64,11 +64,11 @@ export default function TableContainer() {
           </tr>
 
           {finalTableData.map(function (citem, i) {
-            return <TableRow data={citem} key={i} currentRow={i} />;
+            return <TableRow data={citem} key={i} currentRow={citem.id} />;
           })}
         </tbody>
       </table>
-      <Footer />
+      <Footer paginatedTableData={paginatedTableData} />
     </div>
   );
 }

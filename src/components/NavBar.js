@@ -3,8 +3,14 @@ import "./NavBar.css";
 import { PiTrashSimpleThin } from "react-icons/pi";
 
 export default function NavBar() {
-  const { searchQuery, setSearchQuery, mainCheckbox } = useAppData();
-  console.log("This is searchQuery", searchQuery);
+  const {
+    searchQuery,
+    setSearchQuery,
+    mainCheckbox,
+    selectedRowArr,
+    setTableData,
+    setSelectedRowArr,
+  } = useAppData();
 
   function updatesearchquery(inputData) {
     setSearchQuery(inputData.target.value);
@@ -39,12 +45,23 @@ export default function NavBar() {
             border: "1px solid white",
             cursor: "pointer",
           }}
-          disabled={!mainCheckbox}
+          disabled={selectedRowArr.length >= 1 ? false : true}
+          onClick={function () {
+            setTableData(function (crrArr) {
+              return crrArr.filter(function (citem) {
+                return !selectedRowArr.includes(citem.id);
+              });
+            });
+          }}
         >
           <PiTrashSimpleThin
             style={{
               height: "20px",
               width: "20px",
+              color: `${
+                mainCheckbox || selectedRowArr.length >= 1 ? "black" : "white"
+              }`,
+              transitionDuration: "1s",
             }}
           />
         </button>

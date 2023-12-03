@@ -8,6 +8,8 @@ export default function TableDataProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [pageCount, setPageCount] = useState(1);
   const [mainCheckbox, setMainCheckbox] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [selectedRowArr, setSelectedRowArr] = useState([]);
 
   useEffect(function () {
     async function getData() {
@@ -33,6 +35,10 @@ export default function TableDataProvider({ children }) {
         setPageCount,
         mainCheckbox,
         setMainCheckbox,
+        selectedRow,
+        setSelectedRow,
+        selectedRowArr,
+        setSelectedRowArr,
       }}
     >
       {children}

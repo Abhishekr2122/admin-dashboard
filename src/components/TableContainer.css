@@ -14,11 +14,7 @@
 .tablerow {
   height: 46px;
   width: 100px;
-}
-
-.tableroweditbtnactive {
-  color: coral;
-  transition-duration: 0.3s;
+  transition-duration: 1s;
 }
 
 .tablerowactive {
