@@ -16,6 +16,11 @@
   width: 100px;
 }
 
+.tableroweditbtnactive {
+  color: coral;
+  transition-duration: 0.3s;
+}
+
 .tablerowactive {
   background-color: lightsteelblue;
 }

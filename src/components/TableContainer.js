@@ -36,24 +36,6 @@ export default function TableContainer() {
 
   const finalTableData = searchQuery ? filteredTableData : paginatedTableData;
 
-  //   const [tableContainer, setTablecontainer] = useState([]);
-  //   useEffect(function () {
-  //     async function getData() {
-  //       const res = await fetch(
-  //         "https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json"
-  //       );
-
-  //       const data = await res.json();
-  //       setTablecontainer(data);
-  //     }
-
-  //     getData();
-  //   }, []);
-
-  //   if (isLoading) {
-  //     return <p>isLoading...</p>;
-  //   }
-
   return (
     <div
       style={{

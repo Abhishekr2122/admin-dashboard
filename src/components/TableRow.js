@@ -6,9 +6,22 @@ import toast from "react-hot-toast";
 
 export default function TableRow({ data, currentRow }) {
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false);
-  const { setTableData, tableData, mainCheckbox } = useAppData();
+  const [isEditClicked, setIsEditClicked] = useState(false);
+  const [name, setName] = useState(function () {
+    return data.name;
+  });
+  const [role, setRole] = useState(function () {
+    return data.role;
+  });
+  const [email, setEmail] = useState(function () {
+    return data.email;
+  });
+  const { setTableData, mainCheckbox } = useAppData();
+
   function edit() {
-    console.log("Edit button is being clicked");
+    setIsEditClicked(function (crrEditStatus) {
+      return !crrEditStatus;
+    });
   }
 
   function deleterow(clickedRow) {
@@ -36,13 +49,17 @@ export default function TableRow({ data, currentRow }) {
           />
         </form>
       </td>
-      <td className="tabledata">{data.name}</td>
-      <td className="tabledata">{data.email}</td>
-      <td className="tabledata">{data.role}</td>
+      <td className="tabledata">
+        {isEditClicked ? <p>dadadga</p> : data.name}
+      </td>
+      <td className="tabledata">{isEditClicked ? <p>dadad</p> : data.email}</td>
+      <td className="tabledata">
+        {isEditClicked ? <p>addaada</p> : data.role}
+      </td>
       <td className="tabledata">
         <button
           style={{ marginRight: "8px", cursor: "pointer", borderRadius: "2px" }}
-          className="btn"
+          className={`btn ${isEditClicked ? "tableroweditbtnactive" : ""}`}
           onClick={edit}
         >
           <FaRegEdit />

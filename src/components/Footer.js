@@ -2,8 +2,10 @@ import { useAppData } from "../context/TableDataProvider";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import "./Footer.css";
+
 export default function Footer() {
-  const { tableData, pageCount, setPageCount, searchQuery } = useAppData();
+  const { tableData, pageCount, setPageCount, searchQuery, mainCheckbox } =
+    useAppData();
 
   function pagecountupdate(pageNumber) {
     setPageCount(pageNumber);
@@ -28,7 +30,10 @@ export default function Footer() {
   console.log("This is pageCount", pageCount);
   return (
     <div className="footerdiv">
-      <p style={{ marginLeft: "4px" }}>0 of 46 rows selected</p>
+      <p style={{ marginLeft: "4px" }}>
+        {mainCheckbox ? tableData.length : 0} of {tableData.length} rows
+        selected
+      </p>
       <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
         <p>
           page {pageCount} of {Math.round(tableData.length / 10)}
