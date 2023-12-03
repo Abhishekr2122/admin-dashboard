@@ -2,6 +2,7 @@ import "./TableContainer.css";
 import TableRow from "./TableRow";
 import Footer from "./Footer";
 import { useAppData } from "../context/TableDataProvider";
+import { useState } from "react";
 
 export default function TableContainer() {
   const {
@@ -11,6 +12,8 @@ export default function TableContainer() {
     setSearchQuery,
     isLoading,
     pageCount,
+    mainCheckbox,
+    setMainCheckbox,
   } = useAppData();
 
   let paginatedTableData = tableData.filter(function (citem, i) {
@@ -32,7 +35,6 @@ export default function TableContainer() {
   });
 
   const finalTableData = searchQuery ? filteredTableData : paginatedTableData;
-  console.log("This is the resultedSearchQuery", resultedSearchQuery);
 
   //   const [tableContainer, setTablecontainer] = useState([]);
   //   useEffect(function () {
@@ -63,7 +65,14 @@ export default function TableContainer() {
           <tr className="tablerow">
             <th className="tableheader">
               <form>
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  onChange={function () {
+                    setMainCheckbox(function (crrMainCheckbox) {
+                      return !crrMainCheckbox;
+                    });
+                  }}
+                />
               </form>
             </th>
             <th className="tableheader">Name</th>
@@ -73,7 +82,7 @@ export default function TableContainer() {
           </tr>
 
           {finalTableData.map(function (citem, i) {
-            return <TableRow data={citem} key={i} />;
+            return <TableRow data={citem} key={i} currentRow={i} />;
           })}
         </tbody>
       </table>

@@ -16,6 +16,10 @@
   width: 100px;
 }
 
+.tablerowactive {
+  background-color: lightsteelblue;
+}
+
 .tabledata {
   border: 1px solid #dddddd;
   text-align: center;

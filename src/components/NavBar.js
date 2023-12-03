@@ -3,7 +3,7 @@ import "./NavBar.css";
 import { PiTrashSimpleThin } from "react-icons/pi";
 
 export default function NavBar() {
-  const { searchQuery, setSearchQuery } = useAppData();
+  const { searchQuery, setSearchQuery, mainCheckbox } = useAppData();
   console.log("This is searchQuery", searchQuery);
 
   function updatesearchquery(inputData) {
@@ -39,6 +39,7 @@ export default function NavBar() {
             border: "1px solid white",
             cursor: "pointer",
           }}
+          disabled={!mainCheckbox}
         >
           <PiTrashSimpleThin
             style={{

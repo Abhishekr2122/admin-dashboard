@@ -7,6 +7,7 @@ export default function TableDataProvider({ children }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [pageCount, setPageCount] = useState(1);
+  const [mainCheckbox, setMainCheckbox] = useState(false);
 
   useEffect(function () {
     async function getData() {
@@ -30,6 +31,8 @@ export default function TableDataProvider({ children }) {
         isLoading,
         pageCount,
         setPageCount,
+        mainCheckbox,
+        setMainCheckbox,
       }}
     >
       {children}

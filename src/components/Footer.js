@@ -54,7 +54,7 @@ export default function Footer() {
                     pagecountupdate(i + 1);
                   }}
                   key={i}
-                  disabled={searchQuery ? true : false && pageCount != i + 1}
+                  disabled={searchQuery ? true : false && pageCount !== i + 1}
                 >
                   {i + 1}
                 </button>
