@@ -46,7 +46,7 @@ export default function NavBar() {
             border: "1px solid white",
             cursor: "pointer",
           }}
-          disabled={selectedRowArr.length >= 1 ? false : true}
+          disabled={selectedRowArr.length > 1 ? false : true}
           onClick={function () {
             setTableData(function (crrArr) {
               return crrArr.filter(function (citem) {
