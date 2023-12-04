@@ -39,6 +39,7 @@ export default function Footer({ finalTableData }) {
         {mainCheckbox ? finalTableData?.length : selectedRowArr.length} of{" "}
         {finalTableData?.length} rows selected
       </p>
+
       <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
         <p>
           page {pageCount} of {Math.round(tableData.length / 10)}

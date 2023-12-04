@@ -10,6 +10,7 @@ export default function NavBar() {
     mainCheckbox,
     selectedRowArr,
     setTableData,
+    setMainCheckbox,
     setSelectedRowArr,
   } = useAppData();
 
@@ -61,6 +62,9 @@ export default function NavBar() {
                   : `1 row successfully deleted`
               }`
             );
+            setMainCheckbox(function (crrmaincheckbox) {
+              return crrmaincheckbox ? false : false;
+            });
           }}
         >
           <PiTrashSimpleThin

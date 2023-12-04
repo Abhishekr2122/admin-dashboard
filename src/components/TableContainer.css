@@ -1,5 +1,5 @@
 .table {
-  border: 1px solid #dddddd;
+  border: 1px solid #c6b3b3;
   width: 98.5%;
   border-radius: 2px;
   margin-left: 10px;
@@ -22,11 +22,11 @@
 }
 
 .tabledata {
-  border: 1px solid #dddddd;
+  border: 1px solid #c6b3b3;
   text-align: center;
 }
 
 .btn {
-  border: 1px solid #dddddd;
+  border: 1px solid #c6b3b3;
   background-color: white;
 }
