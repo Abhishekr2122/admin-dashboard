@@ -64,7 +64,13 @@ export default function Footer({ paginatedTableData }) {
                     pagecountupdate(i + 1);
                   }}
                   key={i}
-                  disabled={searchQuery ? true : false}
+                  disabled={
+                    searchQuery
+                      ? true
+                      : selectedRowArr.length >= 1 || mainCheckbox
+                      ? pageCount !== i + 1
+                      : false
+                  }
                 >
                   {i + 1}
                 </button>
@@ -74,7 +80,13 @@ export default function Footer({ paginatedTableData }) {
           <button
             className="footerbtn"
             disabled={
-              pageCount >= 5 ? true : false || searchQuery ? true : false
+              pageCount >= 5
+                ? true
+                : false || searchQuery
+                ? true
+                : selectedRowArr.length >= 1 || mainCheckbox
+                ? true
+                : false
             }
             onClick={pageincrement}
           >

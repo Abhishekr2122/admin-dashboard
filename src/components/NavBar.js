@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { useAppData } from "../context/TableDataProvider";
 import "./NavBar.css";
 import { PiTrashSimpleThin } from "react-icons/pi";
@@ -52,6 +53,14 @@ export default function NavBar() {
                 return !selectedRowArr.includes(citem.id);
               });
             });
+
+            toast.success(
+              `${
+                selectedRowArr.length > 1
+                  ? `${selectedRowArr.length} rows successfully deleted`
+                  : `1 row successfully deleted`
+              }`
+            );
           }}
         >
           <PiTrashSimpleThin
