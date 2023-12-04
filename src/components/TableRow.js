@@ -16,22 +16,20 @@ export default function TableRow({ data, currentRow }) {
     selectedRow,
     setSelectedRowArr,
     selectedRowArr,
-    tableData,
+    // tableData,
   } = useAppData();
 
-  console.log(tableData);
-
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false);
-  const [isEditClicked, setIsEditClicked] = useState(false);
-  const [name, setName] = useState(function () {
-    return data.name;
-  });
-  const [role, setRole] = useState(function () {
-    return data.role;
-  });
-  const [email, setEmail] = useState(function () {
-    return data.email;
-  });
+  // const [isEditClicked, setIsEditClicked] = useState(false);
+  // const [name, setName] = useState(function () {
+  //   return data.name;
+  // });
+  // const [role, setRole] = useState(function () {
+  //   return data.role;
+  // });
+  // const [email, setEmail] = useState(function () {
+  //   return data.email;
+  // });
 
   useEffect(
     function () {
@@ -83,6 +81,11 @@ export default function TableRow({ data, currentRow }) {
   function edit(crrSelectedRow) {
     setSelectedRow(crrSelectedRow);
     setMainCheckbox(false);
+    setSelectedRowArr(function (crrArr) {
+      return crrArr.filter(function (citem) {
+        return selectedRowArr.includes(citem.id);
+      });
+    });
   }
 
   function deleterow(clickedRow) {
@@ -91,7 +94,6 @@ export default function TableRow({ data, currentRow }) {
         return citem.id !== clickedRow;
       });
     });
-    console.log("clicked");
 
     toast.success("Row successfully deleted");
   }

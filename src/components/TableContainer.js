@@ -1,22 +1,46 @@
+import { useAppData } from "../context/TableDataProvider";
+import { useEffect } from "react";
 import "./TableContainer.css";
 import TableRow from "./TableRow";
 import Footer from "./Footer";
-import { useAppData } from "../context/TableDataProvider";
+import PageMessage from "./PageMessage";
 
 export default function TableContainer() {
   const {
     tableData,
     searchQuery,
-    setTableData,
-    setSearchQuery,
-    isLoading,
+    // setTableData,
+    // setSearchQuery,
+    // isLoading,
     pageCount,
     mainCheckbox,
     setMainCheckbox,
+    setSelectedRowArr,
   } = useAppData();
 
+  useEffect(
+    function () {
+      if (mainCheckbox) {
+        setSelectedRowArr(function () {
+          return tableData
+            .filter(function (citem) {
+              return (
+                citem.id > (pageCount - 1) * 10 && citem.id <= pageCount * 10
+              );
+            })
+            .map(function (citem) {
+              return citem.id;
+            });
+        });
+      } else {
+        setSelectedRowArr([]);
+      }
+    },
+    [mainCheckbox, setSelectedRowArr, tableData, pageCount]
+  );
+
   let paginatedTableData = tableData.filter(function (citem, i) {
-    return i >= (pageCount - 1) * 10 && i < pageCount * 10;
+    return citem.id > (pageCount - 1) * 10 && citem.id <= pageCount * 10;
   });
 
   let resultedSearchQuery = searchQuery
@@ -34,6 +58,10 @@ export default function TableContainer() {
   });
 
   const finalTableData = searchQuery ? filteredTableData : paginatedTableData;
+
+  if (finalTableData.length === 0) {
+    return <PageMessage />;
+  }
 
   return (
     <div
@@ -68,7 +96,7 @@ export default function TableContainer() {
           })}
         </tbody>
       </table>
-      <Footer paginatedTableData={paginatedTableData} />
+      <Footer finalTableData={finalTableData} />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import "./Footer.css";
 
-export default function Footer({ paginatedTableData }) {
+export default function Footer({ finalTableData }) {
   const {
     tableData,
     pageCount,
@@ -36,8 +36,8 @@ export default function Footer({ paginatedTableData }) {
   return (
     <div className="footerdiv">
       <p style={{ marginLeft: "4px" }}>
-        {mainCheckbox ? paginatedTableData.length : selectedRowArr.length} of{" "}
-        {paginatedTableData.length} rows selected
+        {mainCheckbox ? finalTableData?.length : selectedRowArr.length} of{" "}
+        {finalTableData?.length} rows selected
       </p>
       <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
         <p>
