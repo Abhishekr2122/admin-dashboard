@@ -1,13 +1,10 @@
 import { useAppData } from "../context/TableDataProvider";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./TableContainer.css";
 import TableRow from "./TableRow";
 import Footer from "./Footer";
 import PageMessage from "./PageMessage";
-import { useContext } from "react";
-import { createContext } from "react";
-
-const dataProvider = createContext();
+import { useDataProvider } from "../context/DataProvider";
 
 export default function TableContainer() {
   const {
@@ -21,10 +18,14 @@ export default function TableContainer() {
     setSelectedRowArr,
   } = useAppData();
 
-  const [tableData, setTableData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [currentPageData, setCurrentPageData] = useState([]);
+  const {
+    tableData,
+    setTableData,
+    isLoading,
+    setIsLoading,
+    currentPageData,
+    setCurrentPageData,
+  } = useDataProvider();
 
   useEffect(
     function () {
@@ -46,20 +47,6 @@ export default function TableContainer() {
     },
     [mainCheckbox, setSelectedRowArr, tableData, pageCount]
   );
-
-  useEffect(function () {
-    async function getData() {
-      const res = await fetch(
-        "https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json"
-      );
-      const data = await res.json();
-      setTableData(data);
-
-      setIsLoading(false);
-    }
-
-    getData();
-  }, []);
 
   useEffect(
     function () {
@@ -103,48 +90,39 @@ export default function TableContainer() {
   }
 
   return (
-    <dataProvider.Provider
-      value={{ tableData, setCurrentPageData, setTableData }}
+    <div
+      style={{
+        marginTop: "10px",
+      }}
     >
-      <div
-        style={{
-          marginTop: "10px",
-        }}
-      >
-        <table className="table">
-          <tbody>
-            <tr className="tablerow">
-              <th className="tableheader">
-                <form>
-                  <input
-                    type="checkbox"
-                    onChange={function () {
-                      setMainCheckbox(function (crrMainCheckbox) {
-                        return !crrMainCheckbox;
-                      });
-                    }}
-                    checked={mainCheckbox ? "checked" : ""}
-                  />
-                </form>
-              </th>
-              <th className="tableheader">Name</th>
-              <th className="tableheader">Email</th>
-              <th className="tableheader">Role</th>
-              <th className="tableheader">Actions</th>
-            </tr>
+      <table className="table">
+        <tbody>
+          <tr className="tablerow">
+            <th className="tableheader">
+              <form>
+                <input
+                  type="checkbox"
+                  onChange={function () {
+                    setMainCheckbox(function (crrMainCheckbox) {
+                      return !crrMainCheckbox;
+                    });
+                  }}
+                  checked={mainCheckbox ? "checked" : ""}
+                />
+              </form>
+            </th>
+            <th className="tableheader">Name</th>
+            <th className="tableheader">Email</th>
+            <th className="tableheader">Role</th>
+            <th className="tableheader">Actions</th>
+          </tr>
 
-            {finalTableData.map(function (citem, i, data) {
-              return <TableRow data={citem} key={i} currentRow={citem.id} />;
-            })}
-          </tbody>
-        </table>
-        {/* <Footer finalTableData={finalTableData} /> */}
-      </div>
-    </dataProvider.Provider>
+          {finalTableData.map(function (citem, i, data) {
+            return <TableRow data={citem} key={i} currentRow={citem.id} />;
+          })}
+        </tbody>
+      </table>
+      <Footer finalTableData={finalTableData} />
+    </div>
   );
-}
-
-export function useDataProvider() {
-  const data = useContext(dataProvider);
-  return data;
 }

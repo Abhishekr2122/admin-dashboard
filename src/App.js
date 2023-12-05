@@ -3,13 +3,15 @@ import NavBar from "../src/components/NavBar";
 import TableContainer from "./components/TableContainer";
 import TableDataProvider from "./context/TableDataProvider";
 import { Toaster } from "react-hot-toast";
+import DataProvider from "./context/DataProvider";
 
 function App() {
   return (
     <TableDataProvider>
-      <NavBar />
-      <TableContainer />
-
+      <DataProvider>
+        <NavBar />
+        <TableContainer />
+      </DataProvider>
       <Toaster
         position="top-center"
         gutter={12}

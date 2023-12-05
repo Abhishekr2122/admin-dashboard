@@ -6,7 +6,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdOutlineDelete } from "react-icons/md";
 
 import RowInput from "./RowInput";
-import { useDataProvider } from "./TableContainer";
+import { useDataProvider } from "../context/DataProvider";
 
 export default function TableRow({ data, currentRow }) {
   const {
@@ -18,7 +18,9 @@ export default function TableRow({ data, currentRow }) {
     selectedRowArr,
   } = useAppData();
 
-  const { tableData, setCurrentPageData } = useDataProvider();
+  const { setCurrentPageData } = useDataProvider();
+  console.log(selectedRowArr);
+  console.log(selectedRow);
 
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false);
   // const [isEditClicked, setIsEditClicked] = useState(false);
@@ -33,6 +35,7 @@ export default function TableRow({ data, currentRow }) {
   // });
 
   console.log(selectedRowArr);
+  console.log(selectedRow);
 
   useEffect(
     function () {
@@ -95,6 +98,12 @@ export default function TableRow({ data, currentRow }) {
     setCurrentPageData(function (crrpagedata) {
       return crrpagedata.filter(function (citem, i) {
         return citem.id !== clickedRow;
+      });
+    });
+
+    setSelectedRowArr(function (crrSelectedRowArr) {
+      return crrSelectedRowArr.filter(function (citem) {
+        return citem !== crrSelectedRowArr;
       });
     });
 
