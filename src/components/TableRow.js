@@ -19,8 +19,6 @@ export default function TableRow({ data, currentRow }) {
   } = useAppData();
 
   const { setCurrentPageData } = useDataProvider();
-  console.log(selectedRowArr);
-  console.log(selectedRow);
 
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(false);
   // const [isEditClicked, setIsEditClicked] = useState(false);
@@ -35,7 +33,6 @@ export default function TableRow({ data, currentRow }) {
   // });
 
   console.log(selectedRowArr);
-  console.log(selectedRow);
 
   useEffect(
     function () {
@@ -69,7 +66,7 @@ export default function TableRow({ data, currentRow }) {
         }
       }
 
-      if (isCheckboxClicked) {
+      if (isCheckboxClicked && !(selectedRow === null)) {
         setSelectedRowArr(function (crrArr) {
           return [...new Set([selectedRow, ...crrArr])];
         });
@@ -103,9 +100,11 @@ export default function TableRow({ data, currentRow }) {
 
     setSelectedRowArr(function (crrSelectedRowArr) {
       return crrSelectedRowArr.filter(function (citem) {
-        return citem !== crrSelectedRowArr;
+        return citem !== clickedRow;
       });
     });
+
+    setSelectedRow(null);
 
     toast.success("Row successfully deleted");
   }

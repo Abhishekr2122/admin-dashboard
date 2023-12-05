@@ -18,14 +18,8 @@ export default function TableContainer() {
     setSelectedRowArr,
   } = useAppData();
 
-  const {
-    tableData,
-    setTableData,
-    isLoading,
-    setIsLoading,
-    currentPageData,
-    setCurrentPageData,
-  } = useDataProvider();
+  const { tableData, isLoading, currentPageData, setCurrentPageData } =
+    useDataProvider();
 
   useEffect(
     function () {

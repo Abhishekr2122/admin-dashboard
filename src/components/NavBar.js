@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import { useAppData } from "../context/TableDataProvider";
 import "./NavBar.css";
 import { PiTrashSimpleThin } from "react-icons/pi";
+import { useDataProvider } from "../context/DataProvider";
 
 export default function NavBar() {
   const {
@@ -9,9 +10,19 @@ export default function NavBar() {
     setSearchQuery,
     mainCheckbox,
     selectedRowArr,
-    setTableData,
+    setSelectedRowArr,
     setMainCheckbox,
+    setSelectedRow,
   } = useAppData();
+
+  const { setCurrentPageData, currentPageData } = useDataProvider();
+
+  // console.log(
+  //   "This is the current pageData present in the navbar",
+  //   currentPageData
+  // );
+
+  // console.log("This is the selected Row Array in the navenar", selectedRowArr);
 
   function updatesearchquery(inputData) {
     setSearchQuery(inputData.target.value);
@@ -48,12 +59,11 @@ export default function NavBar() {
           }}
           disabled={selectedRowArr.length > 1 ? false : true}
           onClick={function () {
-            setTableData(function (crrArr) {
+            setCurrentPageData(function (crrArr) {
               return crrArr.filter(function (citem) {
                 return !selectedRowArr.includes(citem.id);
               });
             });
-
             toast.success(
               `${
                 selectedRowArr.length > 1
@@ -64,6 +74,8 @@ export default function NavBar() {
             setMainCheckbox(function (crrmaincheckbox) {
               return crrmaincheckbox ? false : false;
             });
+            setSelectedRowArr([]);
+            setSelectedRow(null);
           }}
         >
           <PiTrashSimpleThin
