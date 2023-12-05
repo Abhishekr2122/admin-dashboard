@@ -11,7 +11,6 @@ export default function NavBar() {
     selectedRowArr,
     setTableData,
     setMainCheckbox,
-    setSelectedRowArr,
   } = useAppData();
 
   function updatesearchquery(inputData) {
