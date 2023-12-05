@@ -31,6 +31,8 @@ export default function TableRow({ data, currentRow }) {
   //   return data.email;
   // });
 
+  console.log(selectedRowArr);
+
   useEffect(
     function () {
       setIsCheckboxClicked(function () {

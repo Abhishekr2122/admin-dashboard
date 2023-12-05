@@ -5,7 +5,7 @@ export default function PageMessage() {
   return (
     <div
       style={{
-        border: "1px solid #dddddd",
+        border: "1px solid #c6b3b3",
         height: "600px",
         marginTop: "15px",
         width: "98%",
@@ -13,7 +13,17 @@ export default function PageMessage() {
         borderRadius: "4px",
       }}
     >
-      <p className="pagemessage">page not found</p>
+      <img
+        src="/pagenotfound.png"
+        alt="page"
+        style={{
+          height: "500px",
+          width: "90%",
+          marginTop: "6px",
+          marginLeft: "75px",
+        }}
+      />
+
       <Footer />
     </div>
   );
