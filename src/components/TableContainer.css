@@ -21,6 +21,10 @@
   background-color: mistyrose;
 }
 
+.edittablerow {
+  background-color: lavender;
+}
+
 .tabledata {
   border: 1px solid #c6b3b3;
   text-align: center;

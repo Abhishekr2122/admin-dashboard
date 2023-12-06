@@ -129,7 +129,11 @@ export default function TableRow({ data, currentRow }) {
   return (
     <tr
       className={`tablerow ${
-        selectedRowArr.includes(currentRow) ? "tablerowactive" : ""
+        selectedRowArr.includes(currentRow)
+          ? currentEditRow === currentRow
+            ? "edittablerow"
+            : "tablerowactive"
+          : ""
       }`}
     >
       <td className="tabledata">
