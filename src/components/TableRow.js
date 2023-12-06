@@ -24,6 +24,8 @@ export default function TableRow({ data, currentRow }) {
     return false;
   });
 
+  const [currentEditRow, setCurrentEditRow] = useState(null);
+
   // const [isEditClicked, setIsEditClicked] = useState(false);
   // const [name, setName] = useState(function () {
   //   return data.name;
@@ -35,11 +37,17 @@ export default function TableRow({ data, currentRow }) {
   //   return data.email;
   // });
 
-  console.log(isCheckboxClicked);
+  // console.log(isCheckboxClicked);
+  console.log(selectedRowArr);
+  console.log(selectedRow);
 
   useEffect(
     function () {
-      if (isCheckboxClicked && selectedRow !== null) {
+      if (
+        isCheckboxClicked &&
+        selectedRow !== null &&
+        currentEditRow === null
+      ) {
         setSelectedRowArr(function (crrSelectedRowArr) {
           return [selectedRow, ...crrSelectedRowArr];
         });
@@ -59,7 +67,11 @@ export default function TableRow({ data, currentRow }) {
 
   useEffect(
     function () {
-      if (isCheckboxClicked === false && selectedRowArr.includes(selectedRow)) {
+      if (
+        isCheckboxClicked === false &&
+        selectedRowArr.includes(selectedRow) &&
+        currentEditRow === null
+      ) {
         setSelectedRowArr(function (crrSelectedRowArr) {
           return crrSelectedRowArr.filter(function (citem) {
             return citem !== selectedRow;
@@ -70,14 +82,22 @@ export default function TableRow({ data, currentRow }) {
     [isCheckboxClicked, setSelectedRowArr, selectedRowArr, selectedRow]
   );
 
+  useEffect(
+    function () {
+      if (currentEditRow !== null) {
+        setSelectedRowArr(function (crrSelectedRow) {
+          return crrSelectedRow.filter(function (citem) {
+            return citem === currentEditRow;
+          });
+        });
+      }
+    },
+    [currentEditRow, setSelectedRowArr]
+  );
+
   function edit(crrSelectedRow) {
-    setSelectedRow(crrSelectedRow);
+    setCurrentEditRow(crrSelectedRow);
     setMainCheckbox(false);
-    setSelectedRowArr(function (crrArr) {
-      return crrArr.filter(function (citem) {
-        return selectedRowArr.includes(citem.id);
-      });
-    });
   }
 
   function deleterow(clickedRow) {
@@ -130,7 +150,7 @@ export default function TableRow({ data, currentRow }) {
           onClick={function () {
             edit(currentRow);
           }}
-          disabled={!isCheckboxClicked}
+          disabled={selectedRowArr.includes(currentRow) ? false : true}
         >
           <FaRegEdit
             style={{
