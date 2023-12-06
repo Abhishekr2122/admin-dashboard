@@ -10,7 +10,7 @@ import RowInput from "./RowInput";
 import { useDataProvider } from "../context/DataProvider";
 
 export default function TableRow({ data, currentRow }) {
-  const { mainCheckbox, setMainCheckbox } = useAppData();
+  const { setMainCheckbox } = useAppData();
 
   const {
     setCurrentPageData,
@@ -62,6 +62,7 @@ export default function TableRow({ data, currentRow }) {
       selectedRowArr,
       setSelectedRowArr,
       setSelectedRow,
+      currentEditRow,
     ]
   );
 
@@ -79,7 +80,13 @@ export default function TableRow({ data, currentRow }) {
         });
       }
     },
-    [isCheckboxClicked, setSelectedRowArr, selectedRowArr, selectedRow]
+    [
+      isCheckboxClicked,
+      setSelectedRowArr,
+      selectedRowArr,
+      selectedRow,
+      currentEditRow,
+    ]
   );
 
   useEffect(
@@ -90,14 +97,15 @@ export default function TableRow({ data, currentRow }) {
             return citem === currentEditRow;
           });
         });
+
+        setMainCheckbox(false);
       }
     },
-    [currentEditRow, setSelectedRowArr]
+    [currentEditRow, setSelectedRowArr, setMainCheckbox]
   );
 
   function edit(crrSelectedRow) {
     setCurrentEditRow(crrSelectedRow);
-    setMainCheckbox(false);
   }
 
   function deleterow(clickedRow) {
@@ -121,9 +129,7 @@ export default function TableRow({ data, currentRow }) {
   return (
     <tr
       className={`tablerow ${
-        selectedRowArr.includes(currentRow) || isCheckboxClicked
-          ? "tablerowactive"
-          : ""
+        selectedRowArr.includes(currentRow) ? "tablerowactive" : ""
       }`}
     >
       <td className="tabledata">
