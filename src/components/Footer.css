@@ -21,7 +21,7 @@
 }
 
 .active {
-  background-color: bisque;
+  background-color: lightblue;
   translate: 0px -5px;
   transition-duration: 0.5s;
 }

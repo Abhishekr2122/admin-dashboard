@@ -4,10 +4,9 @@ import { IoIosArrowForward } from "react-icons/io";
 import "./Footer.css";
 import { useDataProvider } from "../context/DataProvider";
 export default function Footer({ finalTableData }) {
-  const { pageCount, setPageCount, searchQuery, mainCheckbox, selectedRowArr } =
-    useAppData();
+  const { pageCount, setPageCount, searchQuery, mainCheckbox } = useAppData();
 
-  const { tableData } = useDataProvider();
+  const { tableData, selectedRowArr } = useDataProvider();
 
   function pagecountupdate(pageNumber) {
     setPageCount(pageNumber);

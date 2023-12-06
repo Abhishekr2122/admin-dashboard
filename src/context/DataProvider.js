@@ -6,6 +6,8 @@ export default function DataProvider({ children }) {
   const [tableData, setTableData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [selectedRowArr, setSelectedRowArr] = useState([]);
+  const [selectedRow, setSelectedRow] = useState(null);
   const [currentPageData, setCurrentPageData] = useState([]);
 
   useEffect(function () {
@@ -31,6 +33,10 @@ export default function DataProvider({ children }) {
         setIsLoading,
         currentPageData,
         setCurrentPageData,
+        selectedRowArr,
+        setSelectedRowArr,
+        selectedRow,
+        setSelectedRow,
       }}
     >
       {children}

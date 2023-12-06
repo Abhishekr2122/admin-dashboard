@@ -15,11 +15,15 @@ export default function TableContainer() {
     pageCount,
     mainCheckbox,
     setMainCheckbox,
-    setSelectedRowArr,
   } = useAppData();
 
-  const { tableData, isLoading, currentPageData, setCurrentPageData } =
-    useDataProvider();
+  const {
+    tableData,
+    isLoading,
+    currentPageData,
+    setCurrentPageData,
+    setSelectedRowArr,
+  } = useDataProvider();
 
   useEffect(
     function () {
@@ -111,7 +115,7 @@ export default function TableContainer() {
             <th className="tableheader">Actions</th>
           </tr>
 
-          {finalTableData.map(function (citem, i, data) {
+          {finalTableData.map(function (citem, i) {
             return <TableRow data={citem} key={i} currentRow={citem.id} />;
           })}
         </tbody>

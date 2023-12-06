@@ -5,17 +5,16 @@ import { PiTrashSimpleThin } from "react-icons/pi";
 import { useDataProvider } from "../context/DataProvider";
 
 export default function NavBar() {
+  const { searchQuery, setSearchQuery, mainCheckbox, setMainCheckbox } =
+    useAppData();
+
   const {
-    searchQuery,
-    setSearchQuery,
-    mainCheckbox,
+    setCurrentPageData,
+    currentPageData,
     selectedRowArr,
     setSelectedRowArr,
-    setMainCheckbox,
     setSelectedRow,
-  } = useAppData();
-
-  const { setCurrentPageData, currentPageData } = useDataProvider();
+  } = useDataProvider();
 
   // console.log(
   //   "This is the current pageData present in the navbar",

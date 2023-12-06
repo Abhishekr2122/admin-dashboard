@@ -7,8 +7,6 @@ export default function TableDataProvider({ children }) {
 
   const [pageCount, setPageCount] = useState(1);
   const [mainCheckbox, setMainCheckbox] = useState(false);
-  const [selectedRow, setSelectedRow] = useState(null);
-  const [selectedRowArr, setSelectedRowArr] = useState([]);
 
   return (
     <appData.Provider
@@ -19,10 +17,6 @@ export default function TableDataProvider({ children }) {
         setPageCount,
         mainCheckbox,
         setMainCheckbox,
-        selectedRow,
-        setSelectedRow,
-        selectedRowArr,
-        setSelectedRowArr,
       }}
     >
       {children}
