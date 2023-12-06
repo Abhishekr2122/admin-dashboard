@@ -26,16 +26,10 @@ export default function TableRow({ data, currentRow }) {
 
   const [currentEditRow, setCurrentEditRow] = useState(null);
 
-  // const [isEditClicked, setIsEditClicked] = useState(false);
-  // const [name, setName] = useState(function () {
-  //   return data.name;
-  // });
-  // const [role, setRole] = useState(function () {
-  //   return data.role;
-  // });
-  // const [email, setEmail] = useState(function () {
-  //   return data.email;
-  // });
+  const [isEditClicked, setIsEditClicked] = useState(false);
+  const [name, setName] = useState("");
+
+  const [email, setEmail] = useState("");
 
   // console.log(isCheckboxClicked);
   console.log(selectedRowArr);
@@ -150,8 +144,16 @@ export default function TableRow({ data, currentRow }) {
           />
         </form>
       </td>
-      <td className="tabledata">{data.name}</td>
-      <td className="tabledata">{data.email}</td>
+      <td className="tabledata">
+        {currentEditRow === currentRow ? <RowInput value={name} /> : data.name}
+      </td>
+      <td className="tabledata">
+        {currentEditRow === currentRow ? (
+          <RowInput value={email} />
+        ) : (
+          data.email
+        )}
+      </td>
       <td className="tabledata">{data.role}</td>
       <td className="tabledata">
         <button
@@ -177,11 +179,23 @@ export default function TableRow({ data, currentRow }) {
           onClick={function () {
             deleterow(currentRow);
           }}
-          disabled={selectedRowArr.includes(currentRow) ? false : true}
+          disabled={
+            selectedRowArr.includes(currentRow)
+              ? currentEditRow === currentRow
+                ? true
+                : false
+              : true
+          }
         >
           <MdOutlineDelete
             style={{
-              color: `${selectedRowArr.includes(currentRow) ? "red" : "black"}`,
+              color: `${
+                selectedRowArr.includes(currentRow)
+                  ? currentEditRow === currentRow
+                    ? "black"
+                    : "red"
+                  : "black"
+              }`,
               transitionDuration: "1s",
             }}
           />
