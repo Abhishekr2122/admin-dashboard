@@ -6,7 +6,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { CgArrowRightR } from "react-icons/cg";
 import { MdOutlineDelete } from "react-icons/md";
 
-import RowInput from "./RowInput";
+// import RowInput from "./RowInput";
 import { useDataProvider } from "../context/DataProvider";
 
 export default function TableRow({ data, currentRow }) {
@@ -32,8 +32,8 @@ export default function TableRow({ data, currentRow }) {
   const [email, setEmail] = useState("");
 
   // console.log(isCheckboxClicked);
-  console.log(selectedRowArr);
-  console.log(selectedRow);
+  // console.log(selectedRowArr);
+  // console.log(selectedRow);
 
   useEffect(
     function () {
@@ -120,6 +120,14 @@ export default function TableRow({ data, currentRow }) {
     toast.success("Row successfully deleted");
   }
 
+  function updateName(updatedName) {
+    setName(updatedName);
+  }
+
+  function updateEmail(updatedEmail) {
+    setEmail(updatedEmail);
+  }
+
   return (
     <tr
       className={`tablerow ${
@@ -145,11 +153,47 @@ export default function TableRow({ data, currentRow }) {
         </form>
       </td>
       <td className="tabledata">
-        {currentEditRow === currentRow ? <RowInput value={name} /> : data.name}
+        {currentEditRow === currentRow ? (
+          <form
+            onSubmit={function (e) {
+              e.preventDefault();
+            }}
+          >
+            <input
+              value={name}
+              onChange={function (e) {
+                updateName(e.target.value);
+              }}
+              style={{
+                height: "25px",
+                border: "1px solid #c6b3b3",
+                borderRadius: "4px",
+              }}
+            />
+          </form>
+        ) : (
+          data.name
+        )}
       </td>
       <td className="tabledata">
         {currentEditRow === currentRow ? (
-          <RowInput value={email} />
+          <form
+            onSubmit={function (e) {
+              e.preventDefault();
+            }}
+          >
+            <input
+              value={email}
+              onChange={function (e) {
+                updateEmail(e.target.value);
+              }}
+              style={{
+                height: "25px",
+                border: "1px solid #c6b3b3",
+                borderRadius: "4px",
+              }}
+            />
+          </form>
         ) : (
           data.email
         )}
@@ -206,6 +250,13 @@ export default function TableRow({ data, currentRow }) {
             marginLeft: "8px",
             cursor: "pointer",
             borderRadius: "2px",
+          }}
+          onClick={function () {
+            if (name && email.includes("@") && email.endsWith(".com")) {
+              console.log("Success");
+            } else {
+              toast.error("Please fill data in proper format");
+            }
           }}
         >
           <CgArrowRightR
