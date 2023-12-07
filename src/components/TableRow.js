@@ -280,7 +280,9 @@ export default function TableRow({ data, currentRow }) {
               updatedArr[objind] = obj;
 
               setCurrentPageData(updatedArr);
-              console.log("This is currentPagedData", currentPageData);
+              toast.success("Data successfully updated");
+              setCurrentEditRow(null);
+              setSelectedRowArr([]);
             } else {
               toast.error("Please fill data in proper format");
               setName("");
