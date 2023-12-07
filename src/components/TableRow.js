@@ -18,6 +18,7 @@ export default function TableRow({ data, currentRow }) {
     setSelectedRowArr,
     selectedRow,
     setSelectedRow,
+    currentPageData,
   } = useDataProvider();
 
   const [isCheckboxClicked, setIsCheckboxClicked] = useState(function () {
@@ -34,6 +35,7 @@ export default function TableRow({ data, currentRow }) {
   // console.log(isCheckboxClicked);
   // console.log(selectedRowArr);
   // console.log(selectedRow);
+  // console.log(data);
 
   useEffect(
     function () {
@@ -252,10 +254,37 @@ export default function TableRow({ data, currentRow }) {
             borderRadius: "2px",
           }}
           onClick={function () {
-            if (name && email.includes("@") && email.endsWith(".com")) {
-              console.log("Success");
+            if (
+              name &&
+              email.includes("@") &&
+              email.endsWith(".com") &&
+              email[0] >= "a" &&
+              email[0] <= "z"
+            ) {
+              const obj = {
+                name: name,
+                email: email,
+                role: data.role,
+                id: data.id,
+              };
+
+              let objind = 0;
+
+              currentPageData.forEach(function (citem, i) {
+                if (citem.id === currentEditRow) {
+                  objind = i;
+                }
+              });
+
+              let updatedArr = currentPageData;
+              updatedArr[objind] = obj;
+
+              setCurrentPageData(updatedArr);
+              console.log("This is currentPagedData", currentPageData);
             } else {
               toast.error("Please fill data in proper format");
+              setName("");
+              setEmail("");
             }
           }}
         >
