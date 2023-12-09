@@ -1,3 +1,4 @@
+import { useDataProvider } from "../context/DataProvider";
 import Footer from "./Footer";
 import "./PageMessage.css";
 
@@ -24,7 +25,7 @@ export default function PageMessage() {
         }}
       />
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

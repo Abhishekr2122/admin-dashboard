@@ -10,7 +10,7 @@ import { MdOutlineDelete } from "react-icons/md";
 import { useDataProvider } from "../context/DataProvider";
 
 export default function TableRow({ data, currentRow }) {
-  const { setMainCheckbox } = useAppData();
+  const { setMainCheckbox, mainCheckbox } = useAppData();
 
   const {
     setCurrentPageData,
@@ -21,9 +21,7 @@ export default function TableRow({ data, currentRow }) {
     currentPageData,
   } = useDataProvider();
 
-  const [isCheckboxClicked, setIsCheckboxClicked] = useState(function () {
-    return false;
-  });
+  const [isCheckboxClicked, setIsCheckboxClicked] = useState(false);
 
   const [currentEditRow, setCurrentEditRow] = useState(null);
 
@@ -32,10 +30,8 @@ export default function TableRow({ data, currentRow }) {
 
   const [email, setEmail] = useState("");
 
-  // console.log(isCheckboxClicked);
-  // console.log(selectedRowArr);
-  // console.log(selectedRow);
-  // console.log(data);
+  console.log(currentPageData);
+  console.log(selectedRowArr);
 
   useEffect(
     function () {
@@ -98,6 +94,20 @@ export default function TableRow({ data, currentRow }) {
       }
     },
     [currentEditRow, setSelectedRowArr, setMainCheckbox]
+  );
+
+  useEffect(
+    function () {
+      if (
+        isCheckboxClicked === false &&
+        currentEditRow !== null &&
+        isEditClicked === false
+      ) {
+        setCurrentEditRow(null);
+        // setIsEditClicked(false);
+      }
+    },
+    [isCheckboxClicked, currentEditRow, isEditClicked, setSelectedRowArr]
   );
 
   function edit(crrSelectedRow) {
@@ -207,13 +217,26 @@ export default function TableRow({ data, currentRow }) {
           className={`btn `}
           onClick={function () {
             edit(currentRow);
+            setIsEditClicked(function (crrEditClicked) {
+              return !crrEditClicked;
+            });
           }}
-          disabled={selectedRowArr.includes(currentRow) ? false : true}
+          disabled={
+            mainCheckbox
+              ? true
+              : selectedRowArr.includes(currentRow)
+              ? false
+              : true
+          }
         >
           <FaRegEdit
             style={{
               color: `${
-                selectedRowArr.includes(currentRow) ? "orange" : "black"
+                mainCheckbox
+                  ? "black"
+                  : selectedRowArr.includes(currentRow)
+                  ? "orange"
+                  : "black"
               }`,
               transitionDuration: "1s",
             }}
@@ -253,6 +276,7 @@ export default function TableRow({ data, currentRow }) {
             cursor: "pointer",
             borderRadius: "2px",
           }}
+          disabled={currentEditRow === currentRow ? false : true}
           onClick={function () {
             if (
               name &&
@@ -292,9 +316,7 @@ export default function TableRow({ data, currentRow }) {
         >
           <CgArrowRightR
             style={{
-              color: `${
-                selectedRowArr.includes(currentRow) ? "green" : "black"
-              }`,
+              color: `${currentEditRow === currentRow ? "green" : "black"}`,
               transitionDuration: "1s",
             }}
           />

@@ -71,7 +71,7 @@ export default function Footer({ finalTableData }) {
                   {i + 1}
                 </button>
               );
-            }
+            }-
           })}
           <button
             className="footerbtn"
@@ -93,3 +93,4 @@ export default function Footer({ finalTableData }) {
     </div>
   );
 }
++-+*******-*+
